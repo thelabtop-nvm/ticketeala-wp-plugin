@@ -2,24 +2,35 @@
 /**
  * Plugin Name: Ticketeala Chat
  * Description: Conecta ticketeala.com con el chatbot de IA (alojado en Vercel): muestra la burbuja de chat en todas las páginas, expone los datos de cada evento para que el bot los use, avisa al bot en tiempo real cuando se publica/edita un evento, y añade un panel para revisar las preguntas que el bot no supo responder.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Ticketeala
  * Text Domain: ticketeala-chat
+ * Update URI: https://github.com/thelabtop-nvm/ticketeala-wp-plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'TKCHAT_VERSION', '1.0.0' );
+define( 'TKCHAT_VERSION', '1.0.1' );
+
+require __DIR__ . '/puc/plugin-update-checker.php';
+YahnisElsts\PluginUpdateChecker\v5p7\PucFactory::buildUpdateChecker(
+	'https://github.com/thelabtop-nvm/ticketeala-wp-plugin/',
+	__FILE__,
+	'tkchat-bot'
+);
 
 /* ------------------------------------------------------------------ */
 /* Settings (Ajustes → Ticketeala Chat)                                */
 /* ------------------------------------------------------------------ */
 
 function tkchat_default_options() {
+	// No hay secretos aquí a propósito — este archivo vive en un repo público de GitHub
+	// (para que la auto-actualización funcione sin necesitar un token). La primera vez,
+	// rellena la página de Ajustes con los valores reales y guarda.
 	return array(
 		'app_url'        => 'https://ticketeala-chatbot.vercel.app',
-		'webhook_secret'  => '848aba71ef0ad2e10919241e02a13d30c28517ba786e64a1',
-		'admin_key'       => 'O_fHUZV2uNOU',
+		'webhook_secret' => '',
+		'admin_key'      => '',
 	);
 }
 
